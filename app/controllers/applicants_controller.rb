@@ -6,7 +6,7 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants
   def index
-    @applicants = Applicant.order(:name)
+    @applicants = Applicant.includes(:project).order(:name)
   end
 
   # GET /applicants/1

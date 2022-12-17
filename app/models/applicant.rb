@@ -13,6 +13,6 @@ class Applicant < ApplicationRecord
   enum status: { applied: 0, initial_review: 1, more_information_required: 2, declined: 3, approved: 4 }
 
   def project_title
-    'Project'
+    project.title
   end
 end
