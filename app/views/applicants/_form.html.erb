@@ -32,13 +32,22 @@
   </div>
 
   <% unless applicant.new_record? %>
-    <div>
-      <%= form.label :status, style: "display: block" %>
-      <%=
-        form.select :status, options_for_select(
-          Applicant.statuses.map {|key, value| [key.titleize, Applicant.statuses.key(value)]}, applicant.status
-        )
-      %>
+    <div data-controller="applicants" data-applicants-original-value="<%= applicant.status %>">
+      <div>
+        <%= form.label :status, style: "display: block" %>
+        <%=
+          form.select :status, options_for_select(
+            Applicant.statuses.map {|key, value| [key.titleize, Applicant.statuses.key(value)]}, applicant.status
+          ), {}, { data: { applicants_target: "selectField", action: "change->applicants#showStatusHistory" }}
+        %>
+      </div>
+
+      <div id="status-history", style="display: none;">
+        <%= form.fields_for @status_history do |f| %>
+          <%= f.label :comment, "Please state the reason for status change", style: "display: block" %>
+          <%= f.text_area :comment, id: 'status-history-comment' %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 

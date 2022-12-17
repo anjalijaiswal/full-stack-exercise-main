@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Applicant Status History</h1>
+
+<table id="status_history">
+  <thead>
+    <tr>
+      <th>Reason for change</th>
+      <th>Previous Status</th>
+      <th>Current Status</th>
+      <th>Date of Change</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @status_history.each do |status_history| %>
+    <tr>
+      <td><%= status_history.comment %></td>
+      <td><%= get_status(status_history.previous_status) %></td>
+      <td><%= get_status(status_history.current_status) %></td>
+      <td><%= status_history.created_at.to_date %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
